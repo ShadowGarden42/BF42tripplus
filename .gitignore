@@ -3,6 +3,7 @@
 Debug
 Release
 src/gitversion.h
+CMakeLists.txt.user
 Release*.7z
 *.aps
 

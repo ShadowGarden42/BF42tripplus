@@ -380,7 +380,12 @@ void meme::BfMap::onAddBuddyButtonClicked(int selectedPlayerid)
     else {
         // player is already a buddy
         uint32_t newcolor;
+
+#if defined(REDUCE_AV_SCORE)
+        if (false) {
+#else
         if (GetAsyncKeyState(VK_LSHIFT) & 0x8000 || g_settings.presetBuddyColors.value.empty()) {
+#endif
             // if shift is pressed while add buddy button is clicked, assign a random color to the selected buddy
             newcolor = __rdtsc() & 0xffffff;
         }

@@ -7,6 +7,9 @@ project(${TARGET} VERSION 1.0 LANGUAGES C CXX)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
+# GetAsyncKeyState is detected as keylogging behaviour by AVs
+option(REDUCE_AV_SCORE "Remove functionality suspicious to AVs" ON)
+
 
 add_library(${TARGET} SHARED)
 
@@ -50,6 +53,13 @@ target_compile_definitions( ${TARGET} PUBLIC
   UNICODE
   _UNICODE
 )
+
+
+if (${REDUCE_AV_SCORE})
+  target_compile_definitions( ${TARGET} PUBLIC
+    REDUCE_AV_SCORE
+  )
+endif()
 
 
 target_compile_options( ${TARGET} PUBLIC

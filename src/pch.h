@@ -44,7 +44,6 @@
 #include "hooks.h"
 #include "bfhook.h"
 #include "debug.h"
-#include "crashreport.h"
 
 #include "bf/stl.h"
 #include "bf/generic.h"
@@ -56,7 +55,5 @@
 #include "bf/net.h"
 
 #include "settings.h"
-
-extern HMODULE g_this_module;
 
 #endif //PCH_H

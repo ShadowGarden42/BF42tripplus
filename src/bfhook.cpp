@@ -432,7 +432,13 @@ static void __fastcall debugcallback(unsigned int level, bfs::string* modulename
 
     if (level == 4) { // error
         debuglogt("error message received, aborting! (%s)\n", message->c_str());
-        handleFatalError();
+
+        if (isDebuglogOpen()) {
+            closeAndRenameDebuglog(getFileTimestamp(), "error");
+        }
+
+        //ExitProcess(48); // ExitProcess calls global destructors and may cause crash
+        TerminateProcess(GetCurrentProcess(), 49);
     }
 }
 

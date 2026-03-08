@@ -21,7 +21,6 @@ target_sources( ${TARGET} PRIVATE
   src/bf/stl.cpp
   src/bf/ui.cpp
 
-  src/crashreport.cpp
   src/debug.cpp
   src/dllmain.cpp
   src/hooks.c

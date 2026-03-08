@@ -5,7 +5,6 @@
 #include "pch.h"
 #include <tlhelp32.h>
 
-HMODULE g_this_module;
 typedef int __stdcall WinMain_t(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);
 WinMain_t* WinMain_orig = 0;
 int __stdcall WinMain_hook(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
@@ -13,13 +12,9 @@ int __stdcall WinMain_hook(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR l
 
     debuglogt("BF1942 started, plus version: %ls parameters: %s\n", get_build_version(), lpCmdLine);
 
-    initCrashReporter(g_this_module);
-
     g_settings.load();
 
     bfhook_init();
-
-    if (g_settings.crashDumpsToKeep > 0) deleteOldCrashDumps(g_settings.crashDumpsToKeep);
 
     bool forceWindowMode = false;
 
@@ -85,7 +80,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
             // Check if we are running in the correct executable. This address has the call to main()
             if (memcmp((void*)0x00804DA6, "\xE8\x95\x19\xC0\xFF", 5) != 0) break;
 
-            g_this_module = hModule;
             WinMain_orig = (WinMain_t*)modify_call(0x00804DA6, (void*)WinMain_hook);
             break;
         case DLL_THREAD_ATTACH:

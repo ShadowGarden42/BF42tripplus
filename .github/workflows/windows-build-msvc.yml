@@ -64,7 +64,7 @@ jobs:
         path: |
           ${{ steps.strings.outputs.build-output-dir }}\${{ matrix.build_type }}/*.exe
           ${{ steps.strings.outputs.build-output-dir }}\${{ matrix.build_type }}/*.dll
-          ${{ steps.strings.outputs.build-output-dir }}\${{ matrix.build_type }}/BlackScreen/*.exe
+          ${{ steps.strings.outputs.build-output-dir }}\BlackScreen\${{ matrix.build_type }}/*.exe
         if-no-files-found: error
         compression-level: 9
 

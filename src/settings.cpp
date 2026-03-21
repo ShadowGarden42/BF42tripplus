@@ -4,7 +4,7 @@
 
 Settings g_settings;
 
-static const char* CONFIG_FILE = "bf42plus.ini";
+static const char* CONFIG_FILE = "bf42++.ini";
 
 inline void StringSetting::load(const CSimpleIni& ini)
 {

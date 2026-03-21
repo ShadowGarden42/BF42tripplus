@@ -119,11 +119,11 @@ static bool maybeOpenDebuglog()
 {
     if (debuglogOpenFailed) return false;
     CreateDirectory(L"logs", 0);
-    DeleteFile(L"logs/bf42plus_debug.3.log");
-    MoveFile(L"logs/bf42plus_debug.2.log", L"logs/bf42plus_debug.3.log");
-    MoveFile(L"logs/bf42plus_debug.1.log", L"logs/bf42plus_debug.2.log");
-    MoveFile(L"logs/bf42plus_debug.log", L"logs/bf42plus_debug.1.log");
-    debuglogHandle = fopen("logs/bf42plus_debug.log", "w");
+    DeleteFile(L"logs/bf42++_debug.3.log");
+    MoveFile(L"logs/bf42++_debug.2.log", L"logs/bf42++_debug.3.log");
+    MoveFile(L"logs/bf42++_debug.1.log", L"logs/bf42++_debug.2.log");
+    MoveFile(L"logs/bf42++_debug.log", L"logs/bf42++_debug.1.log");
+    debuglogHandle = fopen("logs/bf42++_debug.log", "w");
     if (!debuglogHandle) {
         debuglogOpenFailed = true;
         return false;
@@ -175,7 +175,7 @@ void closeAndRenameDebuglog(const char* timestamp, const char* suffix)
 
     CreateDirectory(L"logs/crash", 0);
 
-    MoveFileA("logs/bf42plus_debug.log", newname);
+    MoveFileA("logs/bf42++_debug.log", newname);
 }
 
 //#endif

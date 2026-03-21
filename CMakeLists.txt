@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 
 cmake_policy(SET CMP0091 NEW)
 
-set(TARGET bf42plus)
+set(TARGET bf42plusplus)
 project(${TARGET} VERSION 1.0 LANGUAGES C CXX)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
@@ -35,6 +35,7 @@ target_sources( ${TARGET} PRIVATE
   src/blake2b/blake2b-ref.c
 
   res/bf42plus.def
+  res/bf42plus.rc
 )
 
 
@@ -45,7 +46,7 @@ set_target_properties( ${TARGET} PROPERTIES
   CXX_STANDARD_REQUIRED ON
   CXX_STANDARD 20
 
-  RUNTIME_OUTPUT_NAME "dsound"
+  RUNTIME_OUTPUT_NAME "bf42++"
 )
 
 

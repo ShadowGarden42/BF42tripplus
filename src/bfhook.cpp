@@ -5,6 +5,12 @@
 int g_actionsToDrop = 0;
 bool g_skipLoadingStaticObjects = false;
 
+void patch_BlackScreen()
+{
+    const char* blackScreenPath = "bf42++BlackScreen.exe %s";
+    patchBytes(0x4550E9, blackScreenPath);
+}
+
 void patch_Particle_handleUpdate_crash()
 {
     // fix crash when game is minimized
@@ -609,6 +615,9 @@ static void patch_add_debug_for_network_errors() {
 void bfhook_init()
 {
     init_hooksystem(NULL);
+
+    if (GetEnvironmentVariableW(L"BF42PLUSPLUS_INJECTED", NULL, 0) != 0)
+        patch_BlackScreen();
 
     patch_Particle_handleUpdate_crash();
     patch_scoreboard_column_widths();

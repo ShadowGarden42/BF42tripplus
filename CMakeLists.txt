@@ -89,3 +89,31 @@ target_include_directories( ${TARGET} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/libs/simpleini>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/libs/libsodium/include>
 )
+
+
+add_executable( bf42plusplus_loader WIN32
+  src/loader.cpp
+  src/hooks.c
+)
+
+set_target_properties( bf42plusplus_loader PROPERTIES
+  C_STANDARD_REQUIRED ON
+  CXX_STANDARD 17
+
+  CXX_STANDARD_REQUIRED ON
+  CXX_STANDARD 20
+
+  RUNTIME_OUTPUT_NAME "bf42++"
+)
+
+target_compile_definitions( bf42plusplus_loader PUBLIC
+  UNICODE
+  _UNICODE
+)
+
+target_include_directories( bf42plusplus_loader PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/libs/simpleini>
+)
+
+
+add_subdirectory(BlackScreen)

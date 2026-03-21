@@ -61,7 +61,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: 'windows-msvc-${{ matrix.config.arch }}'
-        path: '${{ steps.strings.outputs.build-output-dir }}\${{ matrix.build_type }}/*.dll'
+        path: |
+          ${{ steps.strings.outputs.build-output-dir }}\${{ matrix.build_type }}/*.exe
+          ${{ steps.strings.outputs.build-output-dir }}\${{ matrix.build_type }}/*.dll
         if-no-files-found: error
         compression-level: 9
 

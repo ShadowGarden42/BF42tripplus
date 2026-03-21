@@ -80,7 +80,11 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
     {
         case DLL_PROCESS_ATTACH:
             // Check if we are running in the correct executable. This address has the call to main()
-            if (memcmp((void*)0x00804DA6, "\xE8\x95\x19\xC0\xFF", 5) != 0) break;
+            if (memcmp((void*)0x00804DA6, "\xE8\x95\x19\xC0\xFF", 5) != 0)
+            {
+                MessageBoxA(NULL, "bf42++ is being injected into unsupported executable. The injection will be cancelled", NULL, MB_OK);
+                break;
+            }
 
             WinMain_orig = (WinMain_t*)modify_call(0x00804DA6, (void*)WinMain_hook);
             break;

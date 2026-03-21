@@ -229,6 +229,11 @@ bool __stdcall getStringFromRegistry_hook(const char* key, const char* valueName
                 generateNewKey = true;
             }
         }
+        else if (*outlength >= 1 && output[0] == 0) {
+            // ergc is empty
+            ok = false;
+            generateNewKey = true;
+        }
     }
 
     if (generateNewKey) {

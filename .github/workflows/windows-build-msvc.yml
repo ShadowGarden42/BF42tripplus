@@ -57,14 +57,19 @@ jobs:
         --build ${{ steps.strings.outputs.build-output-dir }}
         --config ${{ matrix.build_type }}
 
+    - name: Copy built artifacts
+      run: |
+        copy ${{ steps.strings.outputs.build-output-dir }}\${{ matrix.build_type }}\*.exe ${{ steps.strings.outputs.build-output-dir }}
+        copy ${{ steps.strings.outputs.build-output-dir }}\${{ matrix.build_type }}\*.dll ${{ steps.strings.outputs.build-output-dir }}
+        copy ${{ steps.strings.outputs.build-output-dir }}\BlackScreen\${{ matrix.build_type }}\*.exe ${{ steps.strings.outputs.build-output-dir }}
+
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
         name: 'windows-msvc-${{ matrix.config.arch }}'
         path: |
-          ${{ steps.strings.outputs.build-output-dir }}\${{ matrix.build_type }}/*.exe
-          ${{ steps.strings.outputs.build-output-dir }}\${{ matrix.build_type }}/*.dll
-          ${{ steps.strings.outputs.build-output-dir }}\BlackScreen\${{ matrix.build_type }}/*.exe
+          ${{ steps.strings.outputs.build-output-dir }}/*.exe
+          ${{ steps.strings.outputs.build-output-dir }}/*.dll
         if-no-files-found: error
         compression-level: 9
 

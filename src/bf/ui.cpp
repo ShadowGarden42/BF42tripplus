@@ -382,7 +382,7 @@ void meme::BfMap::onAddBuddyButtonClicked(int selectedPlayerid)
         uint32_t newcolor;
 
 #if defined(REDUCE_AV_SCORE)
-        if (false) {
+        if (g_settings.presetBuddyColors.value.empty()) {
 #else
         if (GetAsyncKeyState(VK_LSHIFT) & 0x8000 || g_settings.presetBuddyColors.value.empty()) {
 #endif

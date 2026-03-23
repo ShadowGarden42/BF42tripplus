@@ -140,7 +140,7 @@ void patch_master_address()
 void patch_show_version_in_menu()
 {
     auto get_version = LAMBDA_FASTCALL(bfs::string*, (bfs::string & s), {
-        auto ss = std::string("BF1942 v1.61; mod ") + WideStringToISO88591(get_build_version());
+        auto ss = std::string("BF1942 v1.61; bf42++ v") + WideStringToISO88591(get_build_version());
         s = ss;
         return &s;
     });

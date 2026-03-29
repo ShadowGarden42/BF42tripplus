@@ -140,7 +140,7 @@ void patch_master_address()
 void patch_show_version_in_menu()
 {
     auto get_version = LAMBDA_FASTCALL(bfs::string*, (bfs::string & s), {
-        auto ss = std::string("BF1942 v1.61; bf42++ v") + WideStringToISO88591(get_build_version());
+        auto ss = std::string("BF1942 v1.61; mod ") + WideStringToISO88591(get_build_version());
         s = ss;
         return &s;
     });
@@ -612,6 +612,21 @@ static void patch_add_debug_for_network_errors() {
     MOVE_CODE_AND_ADD_CODE(a, 0x004B4045, 5, HOOK_DISCARD_ORIGINAL);
 }
 
+static void patch_input_rate() {
+    static const float tickRate = 60.f;
+
+    BEGIN_ASM_CODE(a)
+        mov ecx, tickRate
+        PATCH_CODE(a, 0x00444F71, 6);
+    }
+
+static void patch_input_buffer_size() {
+
+    BEGIN_ASM_CODE(a)
+        push 0x1000
+        PATCH_CODE(a, 0x00444F77, 5);
+    }
+
 void bfhook_init()
 {
     init_hooksystem(NULL);
@@ -635,6 +650,9 @@ void bfhook_init()
     if (g_settings.smootherGameplay) {
         patch_higher_precision_fpu();
         patch_drop_actions();
+		patch_input_rate();
+        patch_input_buffer_size();
+		
     }
 
     patch_add_plus_version_to_accept_ack();
